@@ -1,12 +1,46 @@
 PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - AMapFoundation-NO-IDFA (1.6.9)
+  - AMapNavi-NO-IDFA (8.1.0):
+    - AMapFoundation-NO-IDFA (~> 1.6.9)
   - CoreGPX (0.9.1)
+  - HTMSearchKit (0.64.1):
+    - AFNetworking (~> 4.0.1)
+    - AMapNavi-NO-IDFA (~> 8.1.0)
+    - Turf (~> 0.3)
+    - YYModel (~> 1.0.4)
   - MapCache (0.10.0)
+  - Turf (0.5.0)
+  - YYModel (1.0.4)
 
 DEPENDENCIES:
   - CoreGPX (from `https://github.com/vincentneo/CoreGPX.git`)
+  - HTMSearchKit
   - MapCache (~> 0.10.0)
 
 SPEC REPOS:
+  "git@gitee.com:mylDast1/MySpecRepo-kit.git":
+    - HTMSearchKit
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - AFNetworking
+    - AMapFoundation-NO-IDFA
+    - AMapNavi-NO-IDFA
+    - Turf
+    - YYModel
   trunk:
     - MapCache
 
@@ -20,9 +54,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/vincentneo/CoreGPX.git
 
 SPEC CHECKSUMS:
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  AMapFoundation-NO-IDFA: cc2ec7a2828ef292358ad594b7ee0ae21a7f097b
+  AMapNavi-NO-IDFA: f8d3616a12632da4c14af6b2dae116f84836f65f
   CoreGPX: 95593063c4646ef2bf21e8c86857abdafb5c188e
+  HTMSearchKit: 9502b20cd55df9b8e9023b13a2ff9c5d89ba21f2
   MapCache: d5954fb8dd61e3bcd579d65c2b7b12916feaf975
+  Turf: bdcfefe60df3ca8dc5f742681c178e47f8c5a567
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: a49d54b8068c8884eb56aab1266ae259e1903a0f
+PODFILE CHECKSUM: 12becbfb129bf1ef82afcb3a3c61b96f4929b072
 
 COCOAPODS: 1.12.1

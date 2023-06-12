@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import MapKit
 import CoreGPX
+import HTMSearchKit
 
 ///
 /// This extension adds some methods to work with MapKit
@@ -33,7 +34,9 @@ extension GPXTrackSegment {
     func trackPointsToCoordinates() -> [CLLocationCoordinate2D] {
         var coords: [CLLocationCoordinate2D] = []
         for point in self.points {
-            coords.append(point.coordinate)
+            let coor84 = point.coordinate
+            let coorGcj = HTMSCoorTransform.transformFromWGSToGCJ(coor84)
+            coords.append(coorGcj)
         }
         return coords
     }
