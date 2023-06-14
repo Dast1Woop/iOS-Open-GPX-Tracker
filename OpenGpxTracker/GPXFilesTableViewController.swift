@@ -337,7 +337,7 @@ extension GPXFilesTableViewController {
         
         notificationCenter.addObserver(self, selector: #selector(reloadTableData),
                                        name: .didReceiveFileFromURL, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(reloadTableData), name: .didReceiveFileFromAppleWatch, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(reloadTableData), name: .didReceiveFileFromAppleWatch, object: nil)
     }
     
     ///

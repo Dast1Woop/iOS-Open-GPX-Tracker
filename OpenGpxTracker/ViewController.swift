@@ -16,7 +16,7 @@ import CoreGPX
 
 /// App title
 
-let kAppTitle: String = "  Open GPX Tracker"
+let kAppTitle: String = "  Route Gather"
 /// Purple color for button background
 let kPurpleButtonBackgroundColor: UIColor =  UIColor(red: 146.0/255.0, green: 166.0/255.0, blue: 218.0/255.0, alpha: 0.90)
 
@@ -389,6 +389,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         stopWatch.delegate = self
         
+        //查询数据库，确定是否有root需要显示（上次退出app时如果有root显示，就能查到）
         map.coreDataHelper.retrieveFromCoreData()
         
         // Because of the edges, iPhone X* is slightly different on the layout.
@@ -506,6 +507,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         aboutButton.addTarget(self, action: #selector(ViewController.openAboutViewController), for: .touchUpInside)
         aboutButton.autoresizingMask = [.flexibleRightMargin]
         map.addSubview(aboutButton)
+        aboutButton.isHidden = true
         
         // Preferences button
         preferencesButton.frame = CGRect(x: 5 + 10 + 48, y: 14 + 5 + 8  + iPhoneXdiff, width: 32, height: 32)
@@ -514,6 +516,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         preferencesButton.addTarget(self, action: #selector(ViewController.openPreferencesTableViewController), for: .touchUpInside)
         preferencesButton.autoresizingMask = [.flexibleRightMargin]
         map.addSubview(preferencesButton)
+        preferencesButton.isHidden = true
         
         // Share button
         shareButton.frame = CGRect(x: 5 + 10 + 48 * 2, y: 14 + 5 + 8  + iPhoneXdiff, width: 32, height: 32)
@@ -582,6 +585,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         newPinButton.setImage(UIImage(named: "addPinHigh"), for: .highlighted)
         newPinButton.addTarget(self, action: #selector(ViewController.addPinAtMyLocation), for: .touchUpInside)
         map.addSubview(newPinButton)
+        
+        newPinButton.isHidden = true
         
         // Follow user button
         followUserButton.layer.cornerRadius = kButtonSmallSize/2
@@ -837,7 +842,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
         notificationCenter.addObserver(self, selector: #selector(applicationWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
 
-        notificationCenter.addObserver(self, selector: #selector(presentReceivedFile(_:)), name: .didReceiveFileFromAppleWatch, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(presentReceivedFile(_:)), name: .didReceiveFileFromAppleWatch, object: nil)
 
         notificationCenter.addObserver(self, selector: #selector(loadRecoveredFile(_:)), name: .loadRecoveredFile, object: nil)
         

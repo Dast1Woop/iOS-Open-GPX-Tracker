@@ -48,17 +48,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// Default placeholder function
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if #available(iOS 9.0, *) {
-            if WCSession.isSupported() {
-                print("AppDelegate:: WCSession is supported")
-                let session = WCSession.default
-                session.delegate = self
-                session.activate()
-                print("AppDelegate:: WCSession activated")
-            } else {
-                print("AppDelegate:: WCSession is not supported")
-            }
-        }
+//        if #available(iOS 9.0, *) {
+//            if WCSession.isSupported() {
+//                print("AppDelegate:: WCSession is supported")
+//                let session = WCSession.default
+//                session.delegate = self
+//                session.activate()
+//                print("AppDelegate:: WCSession activated")
+//            } else {
+//                print("AppDelegate:: WCSession is not supported")
+//            }
+//        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. 
         // If the application was previously in the background, optionally refresh the user interface.
     }
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return urls[urls.count-1]
         }()
     
-    /// Default placeholder function
+    /// 负责加载 coredata 模型
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. 
         // It is a fatal error for the application not to be able to find and load its model.
@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return NSManagedObjectModel(contentsOf: modelURL)!
         }()
     
-    /// Default placeholder function
+    /// 负责持久化存储设置+关联模型
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and 
         // return a coordinator, having added the store for the application to it. 
@@ -140,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return coordinator
         }()
     
-    /// Default placeholder function
+    /// 用于 crud 数据对象（create/read/update/delete）
     lazy var managedObjectContext: NSManagedObjectContext = {
         // Returns the managed object context for the application 
         // (which is already bound to the persistent store coordinator for the application.) 
@@ -170,63 +170,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// MARK: WCSessionDelegate
-
-///
-/// Handles file transfers from Apple Watch companion app
-/// Should be non intrusive to UI, handling all in the background.
-
-/// File received are automatically moved to default location which stores all GPX files
-///
-/// Only available > iOS 9
-///
-@available(iOS 9.0, *)
-extension AppDelegate: WCSessionDelegate {
-    
-    /// called when `WCSession` goes inactive. Does nothing but display a debug message.
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        print("AppDelegate:: WCSession has become inactive")
-    }
-    
-    /// called when `WCSession` goes inactive. Does nothing but display a debug message
-    func sessionDidDeactivate(_ session: WCSession) {
-        print("AppDelegate:: WCSession has deactivated")
-    }
-    
-    /// called when activation did complete. Does nothing but display a debug message.
-    @available(iOS 9.3, *)
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        switch activationState {
-        case .activated:
-            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession activated")
-        case .inactive:
-            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession inactive")
-        case .notActivated:
-            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession not activated, error:\(String(describing: error))")
-            
-        default: break
-        }
-    }
-    
-    /// Called when a file is received from Apple Watch.
-    /// Displays a popup informing about the reception of the file.
-    func session(_ session: WCSession, didReceive file: WCSessionFile) {
-        // swiftlint:disable:next force_cast
-        let fileName = file.metadata!["fileName"] as! String?
-        DispatchQueue.global().sync {
-            GPXFileManager.moveFrom(file.fileURL, fileName: fileName)
-            print("ViewController:: Received file from WatchConnectivity Session")
-        }
-        
-        // posts notification that file is received from apple watch
-        NotificationCenter.default.post(name: .didReceiveFileFromAppleWatch, object: nil, userInfo: ["fileName": fileName ?? ""])
-    }
-}
-
+//暂不考虑，注释掉
+//// MARK: WCSessionDelegate
+//
+/////
+///// Handles file transfers from Apple Watch companion app
+///// Should be non intrusive to UI, handling all in the background.
+//
+///// File received are automatically moved to default location which stores all GPX files
+/////
+///// Only available > iOS 9
+/////
+//@available(iOS 9.0, *)
+//extension AppDelegate: WCSessionDelegate {
+//    
+//    /// called when `WCSession` goes inactive. Does nothing but display a debug message.
+//    func sessionDidBecomeInactive(_ session: WCSession) {
+//        print("AppDelegate:: WCSession has become inactive")
+//    }
+//    
+//    /// called when `WCSession` goes inactive. Does nothing but display a debug message
+//    func sessionDidDeactivate(_ session: WCSession) {
+//        print("AppDelegate:: WCSession has deactivated")
+//    }
+//    
+//    /// called when activation did complete. Does nothing but display a debug message.
+//    @available(iOS 9.3, *)
+//    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+//        switch activationState {
+//        case .activated:
+//            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession activated")
+//        case .inactive:
+//            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession inactive")
+//        case .notActivated:
+//            print("AppDelegate:: activationDidCompleteWithActivationState: WCSession not activated, error:\(String(describing: error))")
+//            
+//        default: break
+//        }
+//    }
+//    
+//    /// Called when a file is received from Apple Watch.
+//    /// Displays a popup informing about the reception of the file.
+//    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+//        // swiftlint:disable:next force_cast
+//        let fileName = file.metadata!["fileName"] as! String?
+//        DispatchQueue.global().sync {
+//            GPXFileManager.moveFrom(file.fileURL, fileName: fileName)
+//            print("ViewController:: Received file from WatchConnectivity Session")
+//        }
+//        
+//        // posts notification that file is received from apple watch
+//        NotificationCenter.default.post(name: .didReceiveFileFromAppleWatch, object: nil, userInfo: ["fileName": fileName ?? ""])
+//    }
+//}
+//
 /// Notifications for file receival from external source.
 extension Notification.Name {
     
-    /// Use when a file is received from external source.
+    /// Use when a file is received from external source.比如隔空投送到手机并存到app目录下的事件
     static let didReceiveFileFromURL = Notification.Name("didReceiveFileFromURL")
     
     /// Use when a file is received from Apple Watch.

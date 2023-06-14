@@ -12,11 +12,11 @@ import CoreLocation
 
 #if os(iOS)
 /// GPX creator identifier. Used on generated files identify this app created them.
-let kGPXCreatorString = "Open GPX Tracker for iOS"
+let kGPXCreatorString = "Route Gather for iOS"
 
 #elseif os(watchOS)
 /// GPX creator identifier. Used on generated files identify this app created them.
-let kGPXCreatorString = "Open GPX Tracker for watchOS"
+let kGPXCreatorString = "Route Gather for watchOS"
 
 /// Such that current watch app code remains compatible without needing to rename.
 typealias GPXMapView = GPXSession

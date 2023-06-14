@@ -352,6 +352,7 @@ class CoreDataHelper {
     ///
     func crashFileRecovery() {
         DispatchQueue.global().async {
+            
             // checks if trackpoint and waypoint are available
             if self.currentSegment.points.count > 0 || self.waypoints.count > 0 {
                 let root: GPXRoot
@@ -365,6 +366,7 @@ class CoreDataHelper {
                 } else {
                     root = GPXRoot(creator: kGPXCreatorString)
                 }
+                
                 // generates a GPXRoot from recovered data
                 if self.isContinued && self.tracksegments.count >= (self.lastTracksegmentId + 1) {
                     
