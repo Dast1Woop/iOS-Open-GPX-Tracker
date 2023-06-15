@@ -170,8 +170,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-//暂不考虑，注释掉
-//// MARK: WCSessionDelegate
+// 暂不考虑，注释掉
+// MARK: WCSessionDelegate
 //
 /////
 ///// Handles file transfers from Apple Watch companion app
@@ -181,8 +181,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 /////
 ///// Only available > iOS 9
 /////
-//@available(iOS 9.0, *)
-//extension AppDelegate: WCSessionDelegate {
+// @available(iOS 9.0, *)
+// extension AppDelegate: WCSessionDelegate {
 //    
 //    /// called when `WCSession` goes inactive. Does nothing but display a debug message.
 //    func sessionDidBecomeInactive(_ session: WCSession) {
@@ -222,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        // posts notification that file is received from apple watch
 //        NotificationCenter.default.post(name: .didReceiveFileFromAppleWatch, object: nil, userInfo: ["fileName": fileName ?? ""])
 //    }
-//}
+// }
 //
 /// Notifications for file receival from external source.
 extension Notification.Name {

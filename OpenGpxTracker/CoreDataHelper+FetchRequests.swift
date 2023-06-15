@@ -10,7 +10,7 @@ import CoreGPX
 
 extension CoreDataHelper {
     
-    //查询数据中root信息
+    // 查询数据中root信息
     func rootFetchRequest() -> NSAsynchronousFetchRequest<CDRoot> {
         let rootFetchRequest = NSFetchRequest<CDRoot>(entityName: "CDRoot")
         let asyncRootFetchRequest = NSAsynchronousFetchRequest(fetchRequest: rootFetchRequest) { asynchronousFetchResult in
@@ -19,7 +19,7 @@ extension CoreDataHelper {
             DispatchQueue.main.async {
                 print("Core Data Helper: fetching recoverable CDRoot")
                 
-                /**NSManagedObject instances are not intended to be passed between queues. Doing so can result in corruption of the data and termination of the application. When it is necessary to hand off a managed object reference from one queue to another, it must be done through NSManagedObjectID instances.
+                /** NSManagedObject instances are not intended to be passed between queues. Doing so can result in corruption of the data and termination of the application. When it is necessary to hand off a managed object reference from one queue to another, it must be done through NSManagedObjectID instances.
                  
                  You retrieve the managed object ID of a managed object by calling the objectID method on the NSManagedObject instance.
                  */
@@ -58,12 +58,12 @@ extension CoreDataHelper {
                     // thread safe
                     guard let safePoint = self.appDelegate.managedObjectContext.object(with: objectID) as? CDTrackpoint else { continue }
                     
-                    //遍历到下一段 segment 的点了
+                    // 遍历到下一段 segment 的点了
                     if self.tracksegmentId != safePoint.trackSegmentId {
                         if self.currentSegment.points.count > 0 {
                             self.tracksegments.append(self.currentSegment)
                             
-                            //重置 currentSegment
+                            // 重置 currentSegment
                             self.currentSegment = GPXTrackSegment()
                         }
                         
@@ -78,7 +78,7 @@ extension CoreDataHelper {
                     self.currentSegment.points.append(pt)
                 }
                 
-                //添加最后一段 Segment；上面循环在执行到最后一段Segment时，只是创建了Segment对象并添加了对应点，还没有加到数组里。
+                // 添加最后一段 Segment；上面循环在执行到最后一段Segment时，只是创建了Segment对象并添加了对应点，还没有加到数组里。
                 self.trackpointId = trackPointResults.last?.trackpointId ?? Int64()
                 self.tracksegments.append(self.currentSegment)
                 

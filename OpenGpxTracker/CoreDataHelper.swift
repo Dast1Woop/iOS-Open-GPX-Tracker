@@ -267,7 +267,7 @@ class CoreDataHelper {
     /// to process from those Core Data types to CoreGPX types such as GPXTrackPoint, GPXWaypoint, etc.
     ///
     /// It will also call on crashFileRecovery() method to continue the next procudure.
-    ///homevc vdl 里使用
+    /// homevc vdl 里使用
     func retrieveFromCoreData() {
         let privateManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         privateManagedObjectContext.parent = appDelegate.managedObjectContext

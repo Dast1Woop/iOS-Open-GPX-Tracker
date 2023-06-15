@@ -390,7 +390,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         stopWatch.delegate = self
         
-        //查询数据库，确定是否有root需要显示（上次退出app时如果有root显示，就能查到）
+        // 查询数据库，确定是否有root需要显示（上次退出app时如果有root显示，就能查到）
         map.coreDataHelper.retrieveFromCoreData()
         
         // Because of the edges, iPhone X* is slightly different on the layout.
