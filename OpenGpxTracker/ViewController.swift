@@ -11,6 +11,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreGPX
+import HTMSearchKit
 
 // swiftlint:disable line_length
 
@@ -90,7 +91,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             if followUser {
                 print("followUser=true")
                 followUserButton.setImage(UIImage(named: "follow_user_high"), for: UIControl.State())
-                map.setCenter((map.userLocation.coordinate), animated: true)
+                map.setCenter(map.userLocation.coordinate, animated: true)
                 
             } else {
                 print("followUser=false")
@@ -1376,6 +1377,7 @@ extension ViewController: GPXFilesTableViewControllerDelegate {
         self.resetButtonTapped()
         // println("Loaded GPX file", gpx.gpx())
         lastGpxFilename = gpxFilename
+        
         // Adds last file name to core data as well
         self.map.coreDataHelper.add(toCoreData: gpxFilename, willContinueAfterSave: false)
         // Force reset timer just in case reset does not do it
@@ -1463,7 +1465,8 @@ extension ViewController: CLLocationManagerDelegate {
         
         // Update Map center and track overlay if user is being followed
         if followUser {
-            map.setCenter(newLocation.coordinate, animated: true)
+            let coorGcj = HTMSCoorTransform.transformFromWGSToGCJ(newLocation.coordinate)
+            map.setCenter(coorGcj, animated: true)
         }
         if gpxTrackingStatus == .tracking {
             print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")

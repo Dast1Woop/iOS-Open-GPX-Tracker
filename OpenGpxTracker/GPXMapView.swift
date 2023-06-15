@@ -12,6 +12,7 @@ import CoreLocation
 import CoreGPX
 import CoreData
 import MapCache
+import HTMSearchKit
 
 ///
 /// A MapView that Tracks user position
@@ -256,6 +257,7 @@ class GPXMapView: MKMapView {
     let pt = GPXTrackPoint(location: location)
         coreDataHelper.add(toCoreData: pt, withTrackSegmentID: session.trackSegments.count)
         session.addPointToCurrentTrackSegmentAtLocation(location)
+        
         // RedrawCurrent track segment overlay
         // First remove last overlay, then re-add the overlay updated with the new point
         removeOverlay(currentSegmentOverlay)
@@ -314,7 +316,12 @@ class GPXMapView: MKMapView {
     /// Sets the map region to display all the GPX data in the map (segments and waypoints).
     ///
     func regionToGPXExtent() {
-        setRegion(extent.region, animated: true)
+        
+        // change center coor type
+        var region = extent.region
+        region.center = HTMSCoorTransform.transformFromWGSToGCJ(region.center)
+        let regionGcj = region
+        setRegion(regionGcj, animated: true)
     }
     
     /// Imports GPX contents into the map.
