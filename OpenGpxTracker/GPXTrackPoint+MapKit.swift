@@ -20,5 +20,6 @@ extension GPXTrackPoint {
         self.longitude = location.coordinate.longitude
         self.time = Date()
         self.elevation = location.altitude
+        self.horizontalDilution = location.horizontalAccuracy
     }
 }

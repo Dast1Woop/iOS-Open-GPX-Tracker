@@ -111,6 +111,8 @@ class CoreDataHelper {
             pt.latitude = latitude
             pt.longitude = longitude
             pt.time = trackpoint.time
+            pt.horiAccu = trackpoint.horizontalDilution ?? -1
+            
             pt.trackpointId = self.trackpointId
             pt.trackSegmentId = Int64(Id)
             
