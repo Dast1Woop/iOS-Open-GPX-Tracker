@@ -1152,7 +1152,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.merlos.OpenGpxTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ht.RouteTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = OpenGpxTracker/ObjectiveCBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
@@ -1176,7 +1176,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.merlos.OpenGpxTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ht.RouteTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = OpenGpxTracker/ObjectiveCBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
