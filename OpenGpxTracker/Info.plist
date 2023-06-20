@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>路线采集</string>
+	<string>步行画线测试</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
